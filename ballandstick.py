@@ -11,10 +11,11 @@ def range_assignment(sec, var, start, stop):
         setattr(seg, var, start + seg.x * delta)
         
 class Cell:
-    def __init__(self, gid,ais_mode="soma",acd_connect_x=0.1):
+    def __init__(self, gid,ais_mode="soma",acd_connect_x=0.1,ais_length=60):
         self._gid = gid
         self.ais_mode = ais_mode
-        self._setup_morphology(ais_mode=ais_mode,acd_connect_x=acd_connect_x)
+        self.ais_length = ais_length
+        self._setup_morphology(ais_mode=ais_mode,acd_connect_x=acd_connect_x,ais_length=ais_length)
         self.all = self.soma.wholetree()
         self._setup_biophysics()        
         # h.define_shape()    
@@ -27,7 +28,7 @@ class Cell:
 class BallAndStick(Cell):
     name = "BallAndStick"
 
-    def _setup_morphology(self,ais_mode="soma",acd_connect_x=0.1,apic_diam0=2.5,apic_diam1=0.5):  # 4 to 2 for Hodepp
+    def _setup_morphology(self,ais_mode="soma",acd_connect_x=0.1,apic_diam0=2.5,apic_diam1=0.5,ais_length=60):  # 4 to 2 for Hodepp
         self.soma = h.Section(name="soma", cell=self)
         self.apic = []
         # Main apical branch
@@ -74,12 +75,12 @@ class BallAndStick(Cell):
         self.dend[1].nseg = 1 + 2*int(self.dend[0].L/40) # 1 segments per 40 µm 
         # Axon geometry
         self.ais_prox = h.Section(name="ais_prox",cell=self)
-        self.ais_prox.L = 30 # 17 - Hodapp
+        self.ais_prox.L = ais_length/2 # 17 - Hodapp
         self.ais_prox.diam =  1.5 # 1.22 Hodapp
         self.ais_prox.nseg = 21       
         self.ais_dist = h.Section(name="ais_dist",cell=self)        
         self.ais_dist.connect(self.ais_prox)
-        self.ais_dist.L = 30 # 17 - Hodapp
+        self.ais_dist.L = ais_length/2 # 17 - Hodapp
         self.ais_dist.diam =  1.5 # 1.22 Hodapp
         self.ais_dist.nseg = 21
         self.axon = h.Section(name="axon",cell=self)        
