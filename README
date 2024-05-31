@@ -1,0 +1,18 @@
+======== BIOL 74.03 FINAL ========
+authors: Luke Miles & Megan Leung
+submission date: 6/2/2024
+==================================
+MODEL OVERVIEW
+ballandstick.py creates a simplified ball-and-stick model of a pyramidal neuron with tapering dendrites. the morphology consists of:
+- 1 soma
+- 1 apical dendrite with 2 apical tuft subcomponents
+- 2 basal dendrites
+- 1 axon, which can be attached to either the soma or to one of the basal dendrites
+
+EXPERIMENT FILES
+simulate_BallAndStick_firing_thresholds.ipynb (finalized 5/31/2024)
+- compares firing of somatic AIS vs. dendritic AIS (mean distance found in Hodapp et al. 2022)
+- uses scaling inputs from excitatory synapse (0 - 0.12 µS) and inhibitory synapse (0 - 0.08 µS)
+- outputs successful firings (as reported by Vm > 0 mV in AIS) to heatmap: x = inhibitory weight; y = excitatory weight; color = somatic Vm
+
+simulate_BallAndStick_firing_rate.ipynb
