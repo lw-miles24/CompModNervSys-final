@@ -109,7 +109,7 @@ class BallAndStick(Cell):
             sec.insert('na')                    
             sec.insert('kv')
         # Set somatic conductances
-        self.soma.gbar_na = 100 # 100 pS/um2
+        self.soma.gbar_na = 400 # 100 pS/um2
         self.soma.gbar_kv = 100
 
         # soma_mechs = ['inaT','ikdT','imZ','hNa','kap','cal','cat','somacar','kca','mykca','cad']
